@@ -27,7 +27,7 @@ def run(
     seed_file_artifact_name="",
     extra_configs=[],
     extra_env_vars={},
-    persistent=True,
+    persistent=False,
     launch_adminer=False,
     min_cpu=POSTGRES_MIN_CPU,
     max_cpu=POSTGRES_MAX_CPU,
