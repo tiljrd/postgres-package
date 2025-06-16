@@ -86,6 +86,7 @@ def run(
         }
         ```
     """
+    plan.print("Launching postgres package")
     cmd = []
     files = {}
     env_vars = {
@@ -99,6 +100,7 @@ def run(
         env_vars[k] = v
 
     if persistent:
+        plan.print("Setting persistent directory")
         env_vars["PGDATA"] = DATA_DIRECTORY_PATH + "pgdata"
     if node_selectors == None:
         node_selectors = {}
