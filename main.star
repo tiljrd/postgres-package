@@ -99,10 +99,7 @@ def run(
         env_vars[k] = v
 
     if persistent:
-        files[DATA_DIRECTORY_PATH] = Directory(
-            persistent_key= "data-{0}".format(service_name),
-        )
-        env_vars["PGDATA"] = DATA_DIRECTORY_PATH + "/pgdata"
+        env_vars["PGDATA"] = DATA_DIRECTORY_PATH + "pgdata"
     if node_selectors == None:
         node_selectors = {}
     if config_file_artifact_name != "":
