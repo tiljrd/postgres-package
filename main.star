@@ -27,7 +27,7 @@ def run(
     seed_file_artifact_name="",
     extra_configs=[],
     extra_env_vars={},
-    persistent=False,
+    persistent=True,
     launch_adminer=False,
     min_cpu=POSTGRES_MIN_CPU,
     max_cpu=POSTGRES_MAX_CPU,
@@ -86,7 +86,6 @@ def run(
         }
         ```
     """
-    plan.print("Launching postgres package")
     cmd = []
     files = {}
     env_vars = {
@@ -100,7 +99,7 @@ def run(
         env_vars[k] = v
 
     if persistent:
-        plan.print("Setting persistent directory")
+        plan.print("Using /data folder")
         env_vars["PGDATA"] = DATA_DIRECTORY_PATH + "pgdata"
     if node_selectors == None:
         node_selectors = {}
