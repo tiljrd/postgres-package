@@ -35,57 +35,7 @@ def run(
     max_memory=POSTGRES_MAX_MEMORY,
     node_selectors=None,
 ):
-    """Launches a Postgresql database instance, optionally seeding it with a SQL file script
-
-    Args:
-        image (string): The container image that the Postgres service will be started with
-        service_name (string): The name to give the Postgres service
-        user (string): The user to create the Postgres database with
-        password (string): The password to give to the created user
-        database (string): The name of the database to create
-        config_file_artifact_name (string): The name of a files artifact that contains a Postgres config file in it
-            If not empty, this will be used to configure the Postgres server
-        seed_file_artifact_name (string): The name of a files artifact containing seed data
-            If not empty, the Postgres server will be populated with the data upon start
-        extra_configs (list[string]): Each argument gets passed as a '-c' argument to the Postgres server
-        extra_env_vars dict[string, string]: A dict mapping environment variable names to their values; every pair is added to the Postgres container environment.
-        persistent (bool): Whether the data should be persisted. Defaults to True; Note that this isn't supported on multi node k8s cluster as of 2023-10-16
-        launch_adminer (bool): Whether to launch adminer which launches a website to inspect postgres database entries. Defaults to False.
-        min_cpu (int): Define how much CPU millicores the service should be assigned at least.
-        max_cpu (int): Define how much CPU millicores the service should be assign max.
-        min_memory (int): Define how much MB of memory the service should be assigned at least.
-        max_memory (int): Define how much MB of memory the service should be assigned max.
-        node_selectors (dict[string, string]): Define a dict of node selectors - only works in kubernetes example: {"kubernetes.io/hostname": node-name-01}
-    Returns:
-        An object containing useful information about the Postgres database running inside the enclave:
-        ```
-        {
-            "database": "postgres",
-            "password": "MyPassword1!",
-            "port": {
-                "application_protocol": "postgresql",
-                "number": 5432,
-                "transport_protocol": "TCP",
-                "wait": "2m0s"
-            },
-            "service": {
-                "hostname": "postgres",
-                "ip_address": "172.16.0.4",
-                "name": "postgres",
-                "ports": {
-                    "postgresql": {
-                        "application_protocol": "postgresql",
-                        "number": 5432,
-                        "transport_protocol": "TCP",
-                        "wait": "2m0s"
-                    }
-                }
-            },
-            "url": "postgresql://postgres:MyPassword1!@postgres/postgres",
-            "user": "postgres"
-        }
-        ```
-    """
+    plan.print("Running postgres package")
     cmd = []
     files = {}
     env_vars = {
